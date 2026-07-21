@@ -1,0 +1,1192 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Хоумстейджер Юрченко Анастасия</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --gold: #C9A96E;
+  --gold-light: #D4B87A;
+  --gold-dark: #A88B4A;
+  --black: #0A0A0A;
+  --black-soft: #111111;
+  --black-card: #161616;
+  --white: #F5F0E8;
+  --white-dim: #E8E0D4;
+  --gray: #8A8A8A;
+  --gray-dark: #444444;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: 'Inter', sans-serif;
+  background: var(--black);
+  color: var(--white);
+  overflow-x: hidden;
+  line-height: 1.6;
+}
+h1, h2, h3, h4 { font-family: 'Playfair Display', serif; }
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--black); }
+::-webkit-scrollbar-thumb { background: var(--gold); border-radius: 3px; }
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(40px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes shimmer {
+  0% { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+.animate { opacity: 0; }
+.animate.visible { animation: fadeUp 0.8s ease forwards; }
+.animate-delay-1 { animation-delay: 0.15s; }
+.animate-delay-2 { animation-delay: 0.3s; }
+.animate-delay-3 { animation-delay: 0.45s; }
+.animate-delay-4 { animation-delay: 0.6s; }
+.gold-line {
+  width: 60px;
+  height: 2px;
+  background: linear-gradient(90deg, var(--gold), var(--gold-light), var(--gold));
+  background-size: 200% auto;
+  animation: shimmer 3s linear infinite;
+  margin-bottom: 1.5rem;
+}
+.nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 1000;
+  padding: 1.5rem 4rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: all 0.4s ease;
+  background: transparent;
+}
+.nav.scrolled {
+  background: rgba(10, 10, 10, 0.95);
+  backdrop-filter: blur(20px);
+  padding: 1rem 4rem;
+  border-bottom: 1px solid rgba(201, 169, 110, 0.1);
+}
+.nav-logo {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.5rem;
+  color: var(--gold);
+  letter-spacing: 2px;
+}
+.nav-links {
+  display: flex;
+  gap: 2rem;
+  align-items: center;
+}
+.nav-links a {
+  color: var(--white);
+  text-decoration: none;
+  font-size: 0.8rem;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  transition: color 0.3s;
+  position: relative;
+  white-space: nowrap;
+}
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  bottom: -4px; left: 0;
+  width: 0; height: 1px;
+  background: var(--gold);
+  transition: width 0.3s;
+}
+.nav-links a:hover { color: var(--gold); }
+.nav-links a:hover::after { width: 100%; }
+.btn-gold {
+  background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+  color: var(--black) !important;
+  padding: 0.7rem 1.8rem;
+  border-radius: 2px;
+  font-weight: 500;
+  letter-spacing: 1px;
+  transition: all 0.3s ease;
+  border: none;
+  cursor: pointer;
+  text-transform: uppercase;
+  font-size: 0.8rem;
+  text-decoration: none;
+  display: inline-block;
+}
+.btn-gold:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(201, 169, 110, 0.3);
+}
+.btn-outline {
+  background: transparent;
+  color: var(--gold) !important;
+  border: 1px solid var(--gold);
+  padding: 0.7rem 1.8rem;
+  border-radius: 2px;
+  font-weight: 500;
+  letter-spacing: 1px;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  font-size: 0.8rem;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-block;
+}
+.btn-outline:hover {
+  background: var(--gold);
+  color: var(--black) !important;
+}
+.hero {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+  padding: 0 4rem;
+}
+.hero-bg {
+  position: absolute;
+  top: 0; right: 0;
+  width: 55%;
+  height: 100%;
+  background: linear-gradient(135deg, rgba(201,169,110,0.05) 0%, transparent 100%);
+}
+.hero-grid {
+  position: absolute;
+  top: 0; right: 0;
+  width: 50%;
+  height: 100%;
+  background-image: 
+    linear-gradient(rgba(201,169,110,0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(201,169,110,0.03) 1px, transparent 1px);
+  background-size: 60px 60px;
+}
+.hero-float {
+  position: absolute;
+  right: 8%;
+  top: 20%;
+  width: 180px;
+  height: 180px;
+  border: 1px solid rgba(201,169,110,0.2);
+  border-radius: 50%;
+  animation: float 6s ease-in-out infinite;
+}
+.hero-float-2 {
+  position: absolute;
+  right: 15%;
+  bottom: 15%;
+  width: 100px;
+  height: 100px;
+  border: 1px solid rgba(201,169,110,0.15);
+  border-radius: 50%;
+  animation: float 8s ease-in-out infinite reverse;
+}
+.hero-content {
+  max-width: 700px;
+  position: relative;
+  z-index: 2;
+}
+.hero-subtitle {
+  color: var(--gold);
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  font-size: 0.75rem;
+  margin-bottom: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+.hero-subtitle::before {
+  content: '';
+  width: 40px;
+  height: 1px;
+  background: var(--gold);
+}
+.hero h1 {
+  font-size: clamp(2.5rem, 5vw, 4.5rem);
+  line-height: 1.1;
+  margin-bottom: 1.5rem;
+  font-weight: 400;
+}
+.hero h1 span {
+  color: var(--gold);
+  font-style: italic;
+}
+.hero-desc {
+  color: var(--gray);
+  font-size: 1.1rem;
+  max-width: 500px;
+  margin-bottom: 2.5rem;
+  font-weight: 300;
+}
+.hero-cta {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.hero-image {
+  position: absolute;
+  right: 4rem;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 40%;
+  max-width: 500px;
+  z-index: 1;
+}
+.hero-image img {
+  width: 100%;
+  border-radius: 4px;
+  box-shadow: 0 30px 60px rgba(0,0,0,0.4);
+}
+.section {
+  padding: 8rem 4rem;
+  position: relative;
+}
+.section-header {
+  text-align: center;
+  max-width: 700px;
+  margin: 0 auto 5rem;
+}
+.section-header .gold-line {
+  margin: 0 auto 1.5rem;
+}
+.section-header h2 {
+  font-size: clamp(2rem, 3.5vw, 3rem);
+  margin-bottom: 1rem;
+  font-weight: 400;
+}
+.section-header p {
+  color: var(--gray);
+  font-weight: 300;
+}
+.about { background: var(--black-soft); }
+.about-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 5rem;
+  align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+.about-image {
+  position: relative;
+}
+.about-image img {
+  width: 100%;
+  border-radius: 4px;
+  display: block;
+}
+.about-image::before {
+  content: '';
+  position: absolute;
+  top: -20px; left: -20px;
+  width: 100%; height: 100%;
+  border: 1px solid var(--gold);
+  border-radius: 4px;
+  z-index: -1;
+}
+.experience-badge {
+  position: absolute;
+  bottom: -20px;
+  right: -20px;
+  background: var(--gold);
+  color: var(--black);
+  padding: 1.5rem 2rem;
+  border-radius: 4px;
+  text-align: center;
+}
+.experience-badge .num {
+  font-family: 'Playfair Display', serif;
+  font-size: 2.5rem;
+  font-weight: 600;
+  line-height: 1;
+}
+.experience-badge .label {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin-top: 0.3rem;
+}
+.about-text h3 {
+  font-size: 2rem;
+  margin-bottom: 1.5rem;
+  font-weight: 400;
+}
+.about-text p {
+  color: var(--gray);
+  margin-bottom: 1.2rem;
+  font-weight: 300;
+  line-height: 1.8;
+}
+.why-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+.why-card {
+  background: var(--black-card);
+  border: 1px solid rgba(201,169,110,0.08);
+  padding: 3rem 2rem;
+  border-radius: 4px;
+  transition: all 0.4s ease;
+  position: relative;
+  overflow: hidden;
+}
+.why-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 2px;
+  background: linear-gradient(90deg, var(--gold), transparent);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.4s ease;
+}
+.why-card:hover::before { transform: scaleX(1); }
+.why-card:hover {
+  border-color: rgba(201,169,110,0.2);
+  transform: translateY(-5px);
+}
+.why-card .icon-wrap {
+  margin-bottom: 1.5rem;
+  color: var(--gold);
+}
+.why-card h4 {
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+  font-weight: 500;
+}
+.why-card p {
+  color: var(--gray);
+  font-size: 0.9rem;
+  font-weight: 300;
+  line-height: 1.7;
+}
+.services { background: var(--black-soft); }
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+.service-card {
+  background: var(--black);
+  border: 1px solid rgba(201,169,110,0.1);
+  padding: 2.5rem;
+  border-radius: 4px;
+  transition: all 0.3s ease;
+  display: flex;
+  gap: 1.5rem;
+  align-items: flex-start;
+}
+.service-card:hover {
+  border-color: var(--gold);
+  background: var(--black-card);
+}
+.service-card .num {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.5rem;
+  color: var(--gold);
+  opacity: 0.5;
+  line-height: 1;
+  min-width: 40px;
+}
+.service-card h4 {
+  font-size: 1.1rem;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+}
+.service-card p {
+  color: var(--gray);
+  font-size: 0.9rem;
+  font-weight: 300;
+}
+.process-steps {
+  display: flex;
+  justify-content: space-between;
+  max-width: 1100px;
+  margin: 0 auto;
+  position: relative;
+}
+.process-steps::before {
+  content: '';
+  position: absolute;
+  top: 30px;
+  left: 10%;
+  right: 10%;
+  height: 1px;
+  background: linear-gradient(90deg, var(--gold), transparent 50%, var(--gold));
+  opacity: 0.3;
+}
+.process-step {
+  text-align: center;
+  width: 18%;
+  position: relative;
+  z-index: 1;
+}
+.process-step .step-num {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  border: 1px solid var(--gold);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 1.5rem;
+  font-family: 'Playfair Display', serif;
+  font-size: 1.2rem;
+  color: var(--gold);
+  background: var(--black);
+  transition: all 0.3s;
+}
+.process-step:hover .step-num {
+  background: var(--gold);
+  color: var(--black);
+}
+.process-step h4 {
+  font-size: 1rem;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+}
+.process-step p {
+  color: var(--gray);
+  font-size: 0.8rem;
+  font-weight: 300;
+}
+.projects { background: var(--black-soft); }
+.project-card {
+  max-width: 1000px;
+  margin: 0 auto 4rem;
+  background: var(--black);
+  border: 1px solid rgba(201,169,110,0.1);
+  border-radius: 4px;
+  overflow: hidden;
+}
+.project-header {
+  padding: 2.5rem 3rem;
+  border-bottom: 1px solid rgba(201,169,110,0.1);
+}
+.project-header h3 {
+  font-size: 1.5rem;
+  margin-bottom: 0.5rem;
+  font-weight: 400;
+}
+.project-header .meta {
+  color: var(--gray);
+  font-size: 0.9rem;
+  font-weight: 300;
+}
+.project-header .meta span { color: var(--gold); }
+.project-content {
+  display: grid;
+  grid-template-columns: 1fr;
+}
+.project-info {
+  padding: 2.5rem 3rem;
+}
+.project-info h4 {
+  font-size: 1rem;
+  color: var(--gold);
+  margin-bottom: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-weight: 500;
+}
+.project-info p {
+  color: var(--gray);
+  font-size: 0.9rem;
+  margin-bottom: 1rem;
+  font-weight: 300;
+  line-height: 1.7;
+}
+.project-info ul {
+  color: var(--gray);
+  font-size: 0.9rem;
+  font-weight: 300;
+  line-height: 1.8;
+  padding-left: 1.2rem;
+  margin-bottom: 1rem;
+}
+.project-info ul li {
+  margin-bottom: 0.4rem;
+}
+.project-result {
+  margin-top: 1.5rem;
+  padding: 1.2rem;
+  background: rgba(201,169,110,0.05);
+  border-left: 2px solid var(--gold);
+}
+.project-result .label {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: var(--gold);
+  margin-bottom: 0.3rem;
+}
+.project-result .value {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.3rem;
+  color: var(--white);
+}
+.project-ba {
+  padding: 0 3rem 2.5rem;
+}
+.project-ba img {
+  width: 100%;
+  border-radius: 4px;
+  display: block;
+}
+.project-ba-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+.project-ba-grid img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 4px;
+}
+
+/* Before/After Comparison Slider */
+.ba-section {
+  padding: 4rem;
+  background: var(--black);
+}
+.ba-section-header {
+  text-align: center;
+  margin-bottom: 4rem;
+}
+.ba-section-header .gold-line {
+  margin: 0 auto 1.5rem;
+}
+.ba-section-header h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(2rem, 3.5vw, 3rem);
+  font-weight: 400;
+}
+.ba-slider-container {
+  max-width: 900px;
+  margin: 0 auto 3rem;
+}
+.ba-slider {
+  position: relative;
+  width: 100%;
+  height: 500px;
+  overflow: hidden;
+  border-radius: 4px;
+  border: 1px solid rgba(201,169,110,0.1);
+}
+.ba-slider img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  user-select: none;
+  pointer-events: none;
+}
+.ba-slider .img-after {
+  clip-path: inset(0 0 0 50%);
+}
+.ba-slider-handle {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  width: 4px;
+  background: var(--gold);
+  cursor: ew-resize;
+  z-index: 10;
+  transform: translateX(-50%);
+}
+.ba-slider-handle::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 48px;
+  height: 48px;
+  background: var(--gold);
+  border-radius: 50%;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+}
+.ba-slider-handle::after {
+  content: '◀ ▶';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: var(--black);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 2px;
+  white-space: nowrap;
+}
+.ba-labels {
+  position: absolute;
+  top: 1rem;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: space-between;
+  padding: 0 1.5rem;
+  pointer-events: none;
+  z-index: 5;
+}
+.ba-labels span {
+  background: rgba(10,10,10,0.8);
+  color: var(--gold);
+  padding: 0.4rem 1rem;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  border: 1px solid var(--gold);
+  border-radius: 2px;
+}
+.ba-room-title {
+  text-align: center;
+  margin-top: 1rem;
+  font-family: 'Playfair Display', serif;
+  font-size: 1.2rem;
+  color: var(--white);
+}
+
+.price-section {
+  padding: 6rem 4rem;
+  text-align: center;
+  background: linear-gradient(180deg, var(--black) 0%, var(--black-soft) 100%);
+  position: relative;
+  overflow: hidden;
+}
+.price-section::before {
+  content: '';
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: 600px; height: 600px;
+  border: 1px solid rgba(201,169,110,0.05);
+  border-radius: 50%;
+}
+.price-section h2 {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+  font-weight: 400;
+}
+.price-section p {
+  color: var(--gray);
+  max-width: 500px;
+  margin: 0 auto 2.5rem;
+  font-weight: 300;
+}
+.price-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.8rem;
+  background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+  color: var(--black);
+  padding: 1rem 2.5rem;
+  border-radius: 2px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  font-size: 0.85rem;
+  transition: all 0.3s ease;
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+}
+.price-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 15px 40px rgba(201, 169, 110, 0.3);
+}
+.footer {
+  padding: 4rem;
+  border-top: 1px solid rgba(201,169,110,0.1);
+  text-align: center;
+}
+.footer-logo {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.5rem;
+  color: var(--gold);
+  margin-bottom: 1rem;
+}
+.footer p {
+  color: var(--gray);
+  font-size: 0.85rem;
+  font-weight: 300;
+}
+.footer-contact {
+  margin-top: 1.5rem;
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+}
+.footer-contact a {
+  color: var(--white);
+  text-decoration: none;
+  font-size: 0.85rem;
+  transition: color 0.3s;
+}
+.footer-contact a:hover { color: var(--gold); }
+
+@media (max-width: 900px) {
+  .nav { padding: 1rem 1.5rem; }
+  .nav-links { display: none; }
+  .hero { padding: 6rem 1.5rem 4rem; flex-direction: column; }
+  .hero-content { max-width: 100%; }
+  .hero-image { position: relative; right: 0; top: 0; transform: none; width: 100%; margin-top: 3rem; }
+  .section { padding: 4rem 1.5rem; }
+  .about-grid { grid-template-columns: 1fr; gap: 3rem; }
+  .why-grid { grid-template-columns: 1fr; }
+  .services-grid { grid-template-columns: 1fr; }
+  .process-steps { flex-direction: column; gap: 2rem; }
+  .process-steps::before { display: none; }
+  .process-step { width: 100%; text-align: left; display: flex; gap: 1.5rem; align-items: center; }
+  .project-info { padding: 1.5rem; }
+  .project-ba { padding: 0 1.5rem 1.5rem; }
+  .project-ba-grid { grid-template-columns: 1fr; }
+  .ba-slider { height: 300px; }
+  .ba-section { padding: 2rem 1.5rem; }
+  .hero-float, .hero-float-2 { display: none; }
+  .experience-badge { right: 10px; bottom: -10px; padding: 1rem 1.5rem; }
+  .experience-badge .num { font-size: 1.8rem; }
+  .footer-contact { flex-direction: column; gap: 0.8rem; }
+}
+</style>
+</head>
+<body>
+
+<nav class="nav" id="nav">
+  <div class="nav-logo">HOMESTAGING</div>
+  <div class="nav-links">
+    <a href="#about">Обо мне</a>
+    <a href="#why">Зачем нужен хоумстейджинг</a>
+    <a href="#services">Услуги</a>
+    <a href="#process">Этапы работ</a>
+    <a href="#projects">Реализованные проекты</a>
+    <a href="#price" class="btn-gold">Прайс</a>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <div class="hero-float"></div>
+  <div class="hero-float-2"></div>
+  <div class="hero-content">
+    <div class="hero-subtitle animate">Хоумстейджер</div>
+    <h1 class="animate animate-delay-1">Юрченко Анастасия</h1>
+    <p class="hero-desc animate animate-delay-2">Подготовка недвижимости к продаже и аренде. Превращаю объекты в пространства, которые хочется купить.</p>
+    <div class="hero-cta animate animate-delay-3">
+      <a href="#projects" class="btn-gold">Смотреть проекты</a>
+      <a href="#price" class="btn-outline">Прайс</a>
+    </div>
+  </div>
+  <div class="hero-image animate animate-delay-2">
+    <img src="images/hero_interior.jpg" alt="Интерьер">
+  </div>
+</section>
+
+<section class="section about" id="about">
+  <div class="about-grid">
+    <div class="about-image animate">
+      <img src="images/anastasia.jpg" alt="Анастасия Юрченко">
+      <div class="experience-badge">
+        <div class="num">15</div>
+        <div class="label">лет опыта</div>
+      </div>
+    </div>
+    <div class="about-text animate animate-delay-1">
+      <div class="gold-line"></div>
+      <h3>Меня зовут Анастасия</h3>
+      <p>15 лет я работала в коммерческой недвижимости — от специалиста до руководителя коммерческого отдела Торгового Центра.</p>
+      <p>Я знаю, как объект воспринимается глазами покупателя и арендатора, как формируется его ценность и почему одни пространства сдаются быстро, а другие — годами висят в аренде.</p>
+      <p>Это не просто опыт. Это понимание того, как работает рынок, чего хотят арендаторы и покупатели, и как объект должен «упаковываться», чтобы стоить дороже.</p>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="why">
+  <div class="section-header animate">
+    <div class="gold-line"></div>
+    <h2>Зачем нужен хоумстейджинг?</h2>
+    <p>Подготовленный объект продаётся и сдаётся быстрее и дороже</p>
+  </div>
+  <div class="why-grid">
+    <div class="why-card animate">
+      <div class="icon-wrap">
+        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#C9A96E" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+        </svg>
+      </div>
+      <h4>Скорость продажи</h4>
+      <p>Подготовленный объект уходит с рынка в 3–5 раз быстрее. Покупатель принимает решение в первые 7 секунд.</p>
+    </div>
+    <div class="why-card animate animate-delay-1">
+      <div class="icon-wrap">
+        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#C9A96E" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+        </svg>
+      </div>
+      <h4>Рост цены</h4>
+      <p>Стейджинг окупается многократно: можно поднять стоимость на 5–15% без реального ремонта (только за счёт восприятия).</p>
+    </div>
+    <div class="why-card animate animate-delay-2">
+      <div class="icon-wrap">
+        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#C9A96E" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+        </svg>
+      </div>
+      <h4>Эмоции важнее метров</h4>
+      <p>Люди покупают не квадратные метры, а ощущение безопасности, уюта и статуса. Стейджинг создаёт это ощущение.</p>
+    </div>
+    <div class="why-card animate">
+      <div class="icon-wrap">
+        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#C9A96E" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/>
+          <path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/>
+          <path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/>
+          <path d="M18 2H6v7a6 6 0 0 0 12 0V2z"/>
+        </svg>
+      </div>
+      <h4>Честная конкуренция</h4>
+      <p>Среди десятков одинаковых планировок на сайтах побеждает та, где на фото хочется задержаться взглядом.</p>
+    </div>
+    <div class="why-card animate animate-delay-1">
+      <div class="icon-wrap">
+        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#C9A96E" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+        </svg>
+      </div>
+      <h4>Снижение торга</h4>
+      <p>Когда объект выглядит готовым для жизни, у покупателя меньше поводов сбивать цену.</p>
+    </div>
+    <div class="why-card animate animate-delay-2">
+      <div class="icon-wrap">
+        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#C9A96E" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M3 3v18h18"/><path d="M18.7 8l-5.1 5.2-2.8-2.7L7 14.3"/>
+        </svg>
+      </div>
+      <h4>Бизнес-подход</h4>
+      <p>Я оцениваю объект не только как хоумстейджер, но и как человек бизнеса — с точки зрения ликвидности и целевой аудитории.</p>
+    </div>
+  </div>
+</section>
+
+<section class="section services" id="services">
+  <div class="section-header animate">
+    <div class="gold-line"></div>
+    <h2>В каких направлениях я могу помочь</h2>
+    <p>Комплексные решения для разных типов недвижимости</p>
+  </div>
+  <div class="services-grid">
+    <div class="service-card animate">
+      <div class="num">01</div>
+      <div>
+        <h4>Квартиры от застройщика</h4>
+        <p>Укомплектовка мебелью и декорирование квартир для ускоренной продажи и повышения цены</p>
+      </div>
+    </div>
+    <div class="service-card animate animate-delay-1">
+      <div class="num">02</div>
+      <div>
+        <h4>Шоурумы от застройщиков</h4>
+        <p>Создание атмосферных пространств, которые продают образ жизни, а не квадратные метры</p>
+      </div>
+    </div>
+    <div class="service-card animate">
+      <div class="num">03</div>
+      <div>
+        <h4>Коммерческая недвижимость</h4>
+        <p>Отели, глэмпинги, апарт-проекты: оформление для максимальной доходности и узнаваемого стиля</p>
+      </div>
+    </div>
+    <div class="service-card animate animate-delay-1">
+      <div class="num">04</div>
+      <div>
+        <h4>Онлайн консультации</h4>
+        <p>Быстрый разбор проблем в недвижимости с чёткими рекомендациями</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="process">
+  <div class="section-header animate">
+    <div class="gold-line"></div>
+    <h2>Этапы работ</h2>
+    <p>Прозрачный процесс от аудита до сдачи объекта</p>
+  </div>
+  <div class="process-steps">
+    <div class="process-step animate">
+      <div class="step-num">1</div>
+      <div>
+        <h4>Осмотр</h4>
+        <p>Осмотр объекта и анализ целевой аудитории</p>
+      </div>
+    </div>
+    <div class="process-step animate animate-delay-1">
+      <div class="step-num">2</div>
+      <div>
+        <h4>Анализ</h4>
+        <p>Конкурентный анализ и ценовое позиционирование</p>
+      </div>
+    </div>
+    <div class="process-step animate animate-delay-2">
+      <div class="step-num">3</div>
+      <div>
+        <h4>Концепция</h4>
+        <p>Разработка концепции и смета</p>
+      </div>
+    </div>
+    <div class="process-step animate animate-delay-3">
+      <div class="step-num">4</div>
+      <div>
+        <h4>Реализация</h4>
+        <p>Декорирование, расстановка, текстиль</p>
+      </div>
+    </div>
+    <div class="process-step animate animate-delay-4">
+      <div class="step-num">5</div>
+      <div>
+        <h4>Финал</h4>
+        <p>Фотосессия и сдача объекта</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section projects" id="projects">
+  <div class="section-header animate">
+    <div class="gold-line"></div>
+    <h2>Реализованные проекты</h2>
+    <p>Реальные кейсы с конкретными цифрами</p>
+  </div>
+
+  <div class="project-card animate">
+    <div class="project-header">
+      <h3>Проект №1 — Консультация по подготовке квартиры к долгосрочной аренде</h3>
+      <div class="meta">1-комнатная квартира, 39,6 м², Краснодар · <span>ЖК «Трилогия»</span></div>
+    </div>
+    <div class="project-content">
+      <div class="project-info">
+        <h4>Задача</h4>
+        <p>Квартира с хорошей планировкой, но без концепции и с перегрузкой мебелью. Конкуренты сдавали от 17 до 30 тыс. ₽/мес. Цель — выйти на 30–32 тыс. ₽ при типовом ремонте.</p>
+        <h4>Что было сделано</h4>
+        <ul>
+          <li>Деперсонализация, смена концепции, новое освещение</li>
+          <li><strong>Спальня:</strong> замена шкафа, создание рабочей зоны, обновление текстиля</li>
+          <li><strong>Гостиная:</strong> картина, сервировка, новые светильники</li>
+          <li><strong>Санузел:</strong> замена шторки, экрана ванной, декор</li>
+          <li><strong>Балкон:</strong> расчистка, замена текстиля, ремонт мебели</li>
+        </ul>
+        <div class="project-result">
+          <div class="label">Результат</div>
+          <div class="value">Целевая арендная ставка 30–32 тыс. ₽/мес против рынка 17–25 тыс. ₽ без хоумстейджинга</div>
+        </div>
+      </div>
+    </div>
+    <div class="project-ba">
+      <div class="project-ba-grid">
+        <img src="images/proj1_collage_1.jpg" alt="Проект 1 — коллаж 1">
+        <img src="images/proj1_collage_2.jpg" alt="Проект 1 — коллаж 2">
+      </div>
+    </div>
+  </div>
+
+  <div class="project-card animate">
+    <div class="project-header">
+      <h3>Проект №2 — Подготовка к долгосрочной аренде</h3>
+      <div class="meta">1-комнатная квартира, 41,3 м², Краснодар · <span>ЖК «Каскад»</span></div>
+    </div>
+    <div class="project-content">
+      <div class="project-info">
+        <h4>Задача</h4>
+        <p>Квартира с ремонтом от застройщика. Конкуренты сдавали от 20 до 40 тыс. ₽/мес. Цель — выйти на 30–32 тыс. ₽.</p>
+        <h4>Что было сделано</h4>
+        <ul>
+          <li>Клининг, деперсонализация, мелкий ремонт, декор</li>
+          <li><strong>Спальня:</strong> создание зоны отдыха, обновление текстиля, декор стен</li>
+          <li><strong>Кухня:</strong> обновление дивана, сервировка</li>
+          <li><strong>Санузел:</strong> декор</li>
+          <li><strong>Балкон:</strong> ремонт мебели, обновление обоев</li>
+          <li><strong>Коридор:</strong> обновление обоев</li>
+        </ul>
+        <div class="project-result">
+          <div class="label">Результат</div>
+          <div class="value">Квартира сдана по ставке 32 тыс. ₽/мес с первого показа</div>
+        </div>
+        <p style="margin-top:1rem; font-size:0.85rem; color:var(--gray);">Объём затрат: 42 000 рублей включая услуги хоумстейджинга</p>
+      </div>
+    </div>
+    <div class="project-ba">
+      <div class="project-ba-grid">
+        <img src="images/proj2_bedroom_1.jpg" alt="Проект 2 — спальня 1">
+        <img src="images/proj2_bedroom_2.jpg" alt="Проект 2 — спальня 2">
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="ba-section" id="before-after">
+  <div class="ba-section-header animate">
+    <div class="gold-line"></div>
+    <h2>До и после</h2>
+  </div>
+
+  <div class="ba-slider-container animate">
+    <div class="ba-slider" id="ba-slider-1" data-before="images/ba_bedroom_1_before.jpg" data-after="images/ba_bedroom_1_after.jpg">
+      <img class="img-before" src="images/ba_bedroom_1_before.jpg" alt="До">
+      <img class="img-after" src="images/ba_bedroom_1_after.jpg" alt="После">
+      <div class="ba-labels">
+        <span>До</span>
+        <span>После</span>
+      </div>
+      <div class="ba-slider-handle"></div>
+    </div>
+    <div class="ba-room-title">Спальня</div>
+  </div>
+
+  <div class="ba-slider-container animate animate-delay-1">
+    <div class="ba-slider" id="ba-slider-2" data-before="images/ba_bedroom_2_before.jpg" data-after="images/ba_bedroom_2_after.jpg">
+      <img class="img-before" src="images/ba_bedroom_2_before.jpg" alt="До">
+      <img class="img-after" src="images/ba_bedroom_2_after.jpg" alt="После">
+      <div class="ba-labels">
+        <span>До</span>
+        <span>После</span>
+      </div>
+      <div class="ba-slider-handle"></div>
+    </div>
+    <div class="ba-room-title">Спальня — другой ракурс</div>
+  </div>
+
+  <div class="ba-slider-container animate animate-delay-2">
+    <div class="ba-slider" id="ba-slider-3" data-before="images/ba_kitchen_1_before.jpg" data-after="images/ba_kitchen_1_after.jpg">
+      <img class="img-before" src="images/ba_kitchen_1_before.jpg" alt="До">
+      <img class="img-after" src="images/ba_kitchen_1_after.jpg" alt="После">
+      <div class="ba-labels">
+        <span>До</span>
+        <span>После</span>
+      </div>
+      <div class="ba-slider-handle"></div>
+    </div>
+    <div class="ba-room-title">Кухня</div>
+  </div>
+
+  <div class="ba-slider-container animate animate-delay-3">
+    <div class="ba-slider" id="ba-slider-4" data-before="images/ba_kitchen_2_before.jpg" data-after="images/ba_kitchen_2_after.jpg">
+      <img class="img-before" src="images/ba_kitchen_2_before.jpg" alt="До">
+      <img class="img-after" src="images/ba_kitchen_2_after.jpg" alt="После">
+      <div class="ba-labels">
+        <span>До</span>
+        <span>После</span>
+      </div>
+      <div class="ba-slider-handle"></div>
+    </div>
+    <div class="ba-room-title">Кухня — другой ракурс</div>
+  </div>
+</section>
+
+<section class="price-section" id="price">
+  <div class="gold-line" style="margin:0 auto 1.5rem"></div>
+  <h2 class="animate">Прайс</h2>
+  <p class="animate animate-delay-1">Цены на услуги хоумстейджинга будут опубликованы в ближайшее время. Оставьте заявку, чтобы быть в курсе.</p>
+  <a href="#" class="price-btn animate animate-delay-2" onclick="alert('Форма обратной связи будет добавлена позже')">
+    <span>Узнать стоимость</span>
+    <span>→</span>
+  </a>
+</section>
+
+<footer class="footer">
+  <div class="footer-logo">HOMESTAGING</div>
+  <p>Юрченко Анастасия · Подготовка недвижимости к продаже и аренде</p>
+  <div class="footer-contact">
+    <a href="mailto:contact@example.com">Email</a>
+    <a href="tel:+79990000000">Телефон</a>
+    <a href="#">Telegram</a>
+    <a href="#">WhatsApp</a>
+  </div>
+  <p style="margin-top:2rem; font-size:0.75rem; opacity:0.5">© 2026 Все права защищены</p>
+</footer>
+
+<script>
+// Nav scroll effect
+const nav = document.getElementById('nav');
+window.addEventListener('scroll', () => {
+  nav.classList.toggle('scrolled', window.scrollY > 50);
+});
+
+// Smooth scroll
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+  anchor.addEventListener('click', function(e) {
+    e.preventDefault();
+    const target = document.querySelector(this.getAttribute('href'));
+    if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
+});
+
+// Intersection Observer for animations
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+    }
+  });
+}, { threshold: 0.1 });
+document.querySelectorAll('.animate').forEach(el => observer.observe(el));
+
+// Before/After Slider functionality
+function initBASlider(slider) {
+  const handle = slider.querySelector('.ba-slider-handle');
+  const afterImg = slider.querySelector('.img-after');
+  let isDragging = false;
+
+  function updateSlider(x) {
+    const rect = slider.getBoundingClientRect();
+    let percent = ((x - rect.left) / rect.width) * 100;
+    percent = Math.max(0, Math.min(100, percent));
+    handle.style.left = percent + '%';
+    afterImg.style.clipPath = `inset(0 0 0 ${percent}%)`;
+  }
+
+  handle.addEventListener('mousedown', () => isDragging = true);
+  handle.addEventListener('touchstart', () => isDragging = true);
+
+  window.addEventListener('mouseup', () => isDragging = false);
+  window.addEventListener('touchend', () => isDragging = false);
+
+  slider.addEventListener('mousemove', (e) => {
+    if (!isDragging) return;
+    updateSlider(e.clientX);
+  });
+
+  slider.addEventListener('touchmove', (e) => {
+    if (!isDragging) return;
+    updateSlider(e.touches[0].clientX);
+  });
+
+  slider.addEventListener('click', (e) => {
+    updateSlider(e.clientX);
+  });
+}
+
+document.querySelectorAll('.ba-slider').forEach(initBASlider);
+</script>
+
+</body>
+</html>
